@@ -1,0 +1,144 @@
+{
+  "uid" : "17d10181b77a114b",
+  "name" : "getUserOrderWithoutAuth",
+  "fullName" : "GetUserOrdersTest.getUserOrderWithoutAuth",
+  "historyId" : "37a5f58671b5a6d97be22bd33597570e",
+  "time" : {
+    "start" : 1733242146772,
+    "stop" : 1733242157169,
+    "duration" : 10397
+  },
+  "description" : "Попытка получения заказов пользователя без авторизации",
+  "descriptionHtml" : "<p>Попытка получения заказов пользователя без авторизации</p>\n",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "description" : "Попытка получения заказов пользователя без авторизации",
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Создание юзера",
+      "time" : {
+        "start" : 1733242146772,
+        "stop" : 1733242148178,
+        "duration" : 1406
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Создание заказа",
+      "time" : {
+        "start" : 1733242148178,
+        "stop" : 1733242151420,
+        "duration" : 3242
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Получение случайного списка ингредиентов",
+        "time" : {
+          "start" : 1733242148178,
+          "stop" : 1733242148830,
+          "duration" : 652
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "hasContent" : false,
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : true,
+      "stepsCount" : 1,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Создание заказа",
+      "time" : {
+        "start" : 1733242151420,
+        "stop" : 1733242155336,
+        "duration" : 3916
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Получение случайного списка ингредиентов",
+        "time" : {
+          "start" : 1733242151420,
+          "stop" : 1733242152796,
+          "duration" : 1376
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "hasContent" : false,
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : true,
+      "stepsCount" : 1,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : true,
+    "stepsCount" : 5,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "package",
+    "value" : ""
+  }, {
+    "name" : "testClass",
+    "value" : "GetUserOrdersTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "getUserOrderWithoutAuth"
+  }, {
+    "name" : "suite",
+    "value" : "GetUserOrdersTest"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-4IBFTU3"
+  }, {
+    "name" : "thread",
+    "value" : "13676@DESKTOP-4IBFTU3.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit4"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "17d10181b77a114b.json",
+  "parameterValues" : [ ]
+}
