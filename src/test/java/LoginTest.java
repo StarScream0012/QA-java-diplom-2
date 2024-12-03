@@ -1,8 +1,11 @@
-import io.restassured.RestAssured;
+import api.API;
+import api.IngredientsApiHelper;
+import api.OrderApiHelper;
+import api.UserApiHelper;
+import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import model.CreateUserModel;
 import model.LoginModel;
-import net.datafaker.Faker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,37 +14,28 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-public class LoginTest {
+public class LoginTest extends BaseTest  {
     String email;
     String name;
     String password;
     String accessToken;
-    private static Faker faker = new Faker();
+    private final UserApiHelper userApiHelper = new UserApiHelper();
     @Before
+    @Description("Подготовка данных")
     public void setUp() {
-        RestAssured.baseURI = API.baseURI;
+        super.setUp();
         email=faker.internet().emailAddress();
         name = faker.name().firstName();
         password=faker.internet().password();
         CreateUserModel createUserModel = new CreateUserModel(email,password,name);
-        Response response = given()
-                .header("Content-type", "application/json")
-                .body(createUserModel)
-                .when()
-                .post(API.registerURI);
-        response.then().assertThat().body("success", equalTo(true))
-                .and()
-                .statusCode(200);
+        Response response = userApiHelper.createUser(createUserModel);
         accessToken=response.path("accessToken");
     }
     @Test
+    @Description("Успешная авторизация")
     public void loginTest(){
         LoginModel loginModel=new LoginModel(email,password);
-        Response response = given()
-                .header("Content-type", "application/json")
-                .body(loginModel)
-                .when()
-                .post(API.loginURI);
+        Response response = userApiHelper.login(loginModel);
         response.then().assertThat().body("success", equalTo(true))
                 .body("accessToken", notNullValue())
                 .body("refreshToken", notNullValue())
@@ -51,24 +45,18 @@ public class LoginTest {
                 .statusCode(200);
     }
     @Test
+    @Description("Проверка авторизации с неправильным логином или паролем")
     public void loginFailedTest(){
         LoginModel loginModel=new LoginModel(faker.internet().emailAddress(),faker.internet().password());
-        Response response = given()
-                .header("Content-type", "application/json")
-                .body(loginModel)
-                .when()
-                .post(API.loginURI);
+        Response response = userApiHelper.login(loginModel);
         response.then().assertThat().body("message", equalTo("email or password are incorrect"))
                 .and()
                 .statusCode(401);
     }
     @After
+    @Description("Удаление пользователя")
     public void cleanData(){
-        Response response = given()
-                .header("Content-type", "application/json")
-                .header("Authorization", accessToken)
-                .when()
-                .delete(API.userURI);
+        Response response = userApiHelper.deleteUser(accessToken);
         response.then().assertThat().statusCode(202);
     }
 }

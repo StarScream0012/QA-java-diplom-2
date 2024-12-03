@@ -1,9 +1,12 @@
+import api.API;
+import api.IngredientsApiHelper;
+import api.OrderApiHelper;
+import api.UserApiHelper;
+import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import model.CreateUserModel;
 import model.OrderModel;
-import net.datafaker.Faker;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,26 +19,24 @@ import java.util.Random;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
-public class GetUserOrdersTest {
-    private static Faker faker = new Faker();
+public class GetUserOrdersTest extends BaseTest {
     private String accessToken;
     private List <List<String>>orderIngredients = new ArrayList<>();
-
-
+    private final UserApiHelper userApiHelper = new UserApiHelper();
+    private final OrderApiHelper orderApiHelper = new OrderApiHelper();
+    private final IngredientsApiHelper ingredientsApiHelper = new IngredientsApiHelper();
     @Before
+    @Description("Подготовка данных. Создание пользователя и заказов")
     public void setUp() {
-        RestAssured.baseURI = API.baseURI;
+        super.setUp();
         createUser();
         createUserOrder();
         createUserOrder();
     }
     @Test
+    @Description("Получение заказов пользователя с авторизацией")
     public void getUserOrderWithAuth(){
-        Response response = given()
-                .header("Content-type", "application/json")
-                .header("Authorization", accessToken)
-                .when()
-                .get(API.ordersURI);
+        Response response = orderApiHelper.getUserOrder(accessToken);
         response.then().assertThat().body("success", equalTo(true))
                 .body("orders.status", everyItem(notNullValue()))
                 .body("orders.name", everyItem(notNullValue()))
@@ -54,11 +55,9 @@ public class GetUserOrdersTest {
         Assert.assertEquals(orderIngredients, ingredientsLists);
     }
     @Test
+    @Description("Попытка получения заказов пользователя без авторизации")
     public void getUserOrderWithoutAuth(){
-        Response response = given()
-                .header("Content-type", "application/json")
-                .when()
-                .get(API.ordersURI);
+        Response response = orderApiHelper.getUserOrder();
         response.then().assertThat().body("success", equalTo(false))
                 .body("message", equalTo("You should be authorised"))
                 .and()
@@ -68,11 +67,7 @@ public class GetUserOrdersTest {
     public void createUser(){
         CreateUserModel createUserModel = new CreateUserModel(faker.internet().emailAddress(),
                 faker.internet().password(), faker.name().firstName());
-        Response response = given()
-                .header("Content-type", "application/json")
-                .body(createUserModel)
-                .when()
-                .post(API.registerURI);
+        Response response = userApiHelper.createUser(createUserModel);
         response.then().assertThat().body("success", equalTo(true))
                 .and()
                 .statusCode(200);
@@ -83,46 +78,25 @@ public class GetUserOrdersTest {
 
         List<String> orderIngredients = getRandomIngredients();
         OrderModel orderModel=new OrderModel(orderIngredients);
-        Response response = given()
-                .header("Content-type", "application/json")
-                .header("Authorization", accessToken)
-                .body(orderModel)
-                .when()
-                .post(API.ordersURI);
+        Response response = orderApiHelper.createOrder(orderModel,accessToken);
         response.then().assertThat().body("order.number", notNullValue())
                 .and()
                 .statusCode(200);
-    }
-    @Step("Получение общего списка ингредиентов")
-    public static List<String>  getIngredients(){
-
-        Response response = given()
-                .when()
-                .get(API.getIngredientsURI)
-                .then()
-                .statusCode(200)
-                .extract()
-                .response();
-        return response.jsonPath().getList("data._id");
-
     }
     @Step("Получение случайного списка ингредиентов")
     public List<String> getRandomIngredients() {
         List<String> orderIngredients = new ArrayList<String>();
         Random random = new Random();
-        List ingredients= getIngredients();
+        List ingredients= ingredientsApiHelper.getAllIngredients();
         orderIngredients.add((String) ingredients.get(random.nextInt(ingredients.size())));
         orderIngredients.add((String) ingredients.get(random.nextInt(ingredients.size())));
         this.orderIngredients.add(orderIngredients);
         return orderIngredients;
     }
     @After
+    @Description("Удаление пользователя")
     public void cleanData(){
-        Response response = given()
-                .header("Content-type", "application/json")
-                .header("Authorization", accessToken)
-                .when()
-                .delete(API.userURI);
+        Response response = userApiHelper.deleteUser(accessToken);
         response.then().assertThat().statusCode(202);
     }
 }

@@ -2,9 +2,9 @@ package model;
 
 public class CreateUserModel {
 
-    String email;
-    String password;
-    String name;
+    private String email;
+    private String password;
+    private String name;
 
 
     public CreateUserModel(String email, String password, String name) {

@@ -1,0 +1,99 @@
+{
+  "uid" : "4b5e3099f3f536b6",
+  "name" : "createOrderWithAuthAndIngredients",
+  "fullName" : "CreateOrderTest.createOrderWithAuthAndIngredients",
+  "historyId" : "51ca2ff325cb78f9603550bb63a8a0db",
+  "time" : {
+    "start" : 1733242117679,
+    "stop" : 1733242128110,
+    "duration" : 10431
+  },
+  "description" : "Создание заказа с авторизацией и с ингредиентами",
+  "descriptionHtml" : "<p>Создание заказа с авторизацией и с ингредиентами</p>\n",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "description" : "Создание заказа с авторизацией и с ингредиентами",
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Создание юзера",
+      "time" : {
+        "start" : 1733242118561,
+        "stop" : 1733242123278,
+        "duration" : 4717
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Получение случайного списка ингредиентов",
+      "time" : {
+        "start" : 1733242124125,
+        "stop" : 1733242124125,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : true,
+    "stepsCount" : 2,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "package",
+    "value" : ""
+  }, {
+    "name" : "testClass",
+    "value" : "CreateOrderTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "createOrderWithAuthAndIngredients"
+  }, {
+    "name" : "suite",
+    "value" : "CreateOrderTest"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-4IBFTU3"
+  }, {
+    "name" : "thread",
+    "value" : "13676@DESKTOP-4IBFTU3.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit4"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "4b5e3099f3f536b6.json",
+  "parameterValues" : [ ]
+}
